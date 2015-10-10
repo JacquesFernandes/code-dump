@@ -1,0 +1,20 @@
+'''MAIN EXECUTION FILE'''
+import serial;
+import load;
+
+def dist(ax,ay,bx,by):
+	x2 = (ax-bx)*(ax-bx);
+	y2 = (ay-by)*(ay-by);
+	res = sqrt(x2+y2);
+
+def calcQuad(x,y):
+	x_int = int(str(x).split(".")[0]);
+	
+	stry = str(y);
+	
+
+'''MAIN CODE '''
+locations = load.main();
+
+for 
+

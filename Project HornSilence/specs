@@ -1,0 +1,23 @@
+Language : Python3.x
+
+- Storage of locations in csv, broken by lines.
+- 9 degrees (GPS) = 1000km [http://www.nhc.noaa.gov/gccalc.shtml]
+- 1m = 9/(1000*1000) = 9 x 10^(-6) degrees [TOO SMALL]
+- Radius of no honking = 200m [http://timesofindia.indiatimes.com/city/guwahati/No-honking-within-200-metre-radius-of-high-court-other-courts/articleshow/13039850.cms]
+- 200m = 2 x 10^2 x 9 x 10^(-6) = 18 x (10^-4) = 1.8 x 10^(-3) = 0.0018 degrees
+
+- 200m = 0.0018 degrees
+
+- RECIEVED COORDs: 
+-- Lattitude: ddmm.mmmm -> dd.mmmmmm
+-- Longitude: dddmm.mmmm -> ddd.mmmmmm  137.4954 62.46114
+
+Queries
+- Quadrant resolution?? (0.0000 -> 0.0050 degrees :: 555.5555m) w.r.t. present location (until end of current quadrant)
+- Generate new quadrants?
+-- End of current quadrant (?)
+
+
+
+1 - Get position
+2 - calculate the neighboring 8 quadrants (relative)

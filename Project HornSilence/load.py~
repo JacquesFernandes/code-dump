@@ -1,0 +1,19 @@
+'''USED TO LOAD LOCATIONS INTO SYSTEM'''
+
+def main():
+	#Get current location
+	#Calculate Quadrant
+	#load file for specific quadrant
+	locs = open("./files/loc.txt","r");
+	locations = list();
+	for loc in locs.readlines():
+		loc = loc.split(",");
+		x = loc[0];
+		y = loc[1];
+		if "\n" in x:
+			x = x.strip("\n");
+		if "\n" in y:
+			y = y.strip("\n");
+		locations.append({float(x),float(y)})
+	print(locations);
+	locs.close();
