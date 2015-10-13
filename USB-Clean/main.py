@@ -1,7 +1,7 @@
 #Code to undo virus
 import sys;
 import os;
-from usb import usb;
+from usb import Usb;
 
 def safeRem(fname):
 	try:

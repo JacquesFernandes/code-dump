@@ -1,6 +1,6 @@
 import os;
 
-class usb:
+class Usb:
 	
 	username = str();
 	run_empty = True;
