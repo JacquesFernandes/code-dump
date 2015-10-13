@@ -22,5 +22,15 @@ class Key:
 		self.left = near[2];
 		self.right = near[3];
 	
-	def set_pos(self,x,y):
-		
+	def keyindir(self,pos):
+		if pos is 1:
+			return(self.up);
+		elif pos is 2:
+			return(self.down);
+		elif pos is 3:
+			return(self.left);
+		elif pos is 4:
+			return(self.right);
+
+	def __str__(self):
+		return(self.key);
