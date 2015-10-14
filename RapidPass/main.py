@@ -1,4 +1,5 @@
 from keys import Key;
+import os;
 from random import randint;
 
 #setup
@@ -31,6 +32,8 @@ z = Key("z","a--x");
 
 keys = {"a":a,"b":b,"c":c,"d":d,"e":e,"f":f,"g":g,"h":h,"i":i,"j":j,"k":k,"l":l,"m":m,"n":n,"o":o,"p":p,"q":q,"r":r,"s":s,"t":t,"u":u,"v":v,"w":w,"x":x,"y":y,"z":z};
 
+os.system("clear");
+
 length = int(input("Enter the length of the password \n->"));
 dist = input("Distinct letters?\n 1 - yes \t2 - no\n->");
 if dist is "1":
@@ -46,8 +49,10 @@ prevkey = init;
 for i in range(0,length-1):
 	direct = randint(1,4);
 	nextkey = keys[prevkey].keyindir(direct);
-	while nextkey in paswd:
-		nextkey = keys[prevkey].keyindir(direct);
+	if dist is True:
+		while nextkey in paswd:
+			direct = randint(1,4);
+			nextkey = keys[prevkey].keyindir(direct);
 	while nextkey is "-":
 		direct = randint(1,4);
 		nextkey = keys[prevkey].keyindir(direct);
