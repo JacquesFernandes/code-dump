@@ -1,0 +1,6 @@
+~$WM.FAT32
+Thumbs.db
+autorun.inf
+Autorun.inf
+RECYCLER
+IndexerVolumeGuid
