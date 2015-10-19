@@ -3,22 +3,31 @@ import sys;
 import os;
 from usb import Usb;
 
-backup = ["~$WM.FAT32","Thumbs.db","autorun.inf","Autorun.inf","RECYCLER"];
+backup = ["~\$WM.FAT32","~$WM.FAT32","Thumbs.db","autorun.inf","Autorun.inf","RECYCLER","\xa0"," .exe"];
 db = list();
+db_new = list();
 depth = 0;
+exec_root = os.getcwd();
 
 def bringBack(depth):
 	for i in range(1,depth):
 		os.system("mv -v * ../");
-		if "_" in os.listdir():
-			linuxRem("_");
-		if "\xa0" in os.listdir():
-			linuxRem("\xa0");
 		os.chdir("../");
-
+		files = os.listdir();
+		
+		for obj in files:
+			if obj is "_":
+				linuxRem("_");
+			if obj is "\xa0":
+				linuxRem("\xa0");
+		disinfect();
+				
 def linuxRem(fname):
-	if fname in os.listdir():
-		os.system("rm -rv '"+fname+"'");
+	files = os.listdir();
+	for obj in files:
+		if obj is fname:
+			os.system("rm -rfv '"+fname+"'");
+			#print("[linuxRem] Removed "+fname+"...");
 
 def disinfect():
 	files = os.listdir();
@@ -26,34 +35,50 @@ def disinfect():
 	
 	for test in files:
 		if test in db:
-			os.system("rm -rv "+test);
+			os.system("rm -rfv "+test);
 			files.remove(test);
-			print("Removed "+test+"...");
-	
-	for test in files:
-		if ".ini" in test:
-			linuxRem(test);
-		if ".lnk" in test:
-			linuxRem(test);
-		if ".vbs" in test:
-			linuxRem(test);
-		if ".Trash" in test:
-			linuxRem(test);
-		if "{" in test:
-			linuxRem(test);
-		if ".BIN" in test:
-			linuxRem(test);
-	
-	for test in files:
-		if ".exe" in test:
-			exes.append(test);
-	
-	for test in exes:
-		if test.strip(".exe") in files:
-			linuxRem(test);
-			if test not in db:
-				db.append(test);
-		
+			#print("[disinfect] Removed "+test+"...");
+			
+#"Learning" about new files
+	if len(files) > 0:		
+		for test in files:
+			if ".ini" in test:
+				linuxRem(test);
+				db_new.append(test);
+			if ".lnk" in test:
+				linuxRem(test);
+				db_new.append(test);
+			if ".vbs" in test:
+				linuxRem(test);
+				db_new.append(test);
+			if ".Trash" in test:
+				linuxRem(test);
+				db_new.append(test);
+			if "{" in test:
+				linuxRem(test);
+				db_new.append(test);
+			if ".BIN" in test:
+				linuxRem(test);
+				db_new.append(test);
+			
+		for test in files:
+			if ".exe" in test:
+				exes.append(test);
+		for test in exes:
+			if test.strip(".exe") in files:
+				linuxRem(test);
+				print("removed "+test);
+				if test not in db:
+					db_new.append(test);
+		try:
+			os.remove("~$WM.FAT32");
+		except FileNotFoundError:
+			print("");
+			
+		try:
+			os.remove("\xa0.exe");
+		except FileNotFoundError:
+			print("");
 '''----------------------[setup]'''
 os.system("clear");
 try:
@@ -65,6 +90,11 @@ try:
 except FileNotFoundError:
 	print("\n\n --Setup: Error: Virus list not found, using backup list...");
 	db = backup;
+	print(" --Setup: Creating virus list");
+	db_file = open("list.txt","a+");
+	for line in backup:
+		db_file.write(line+"\n");
+	db_file.close();
 
 #find pendrive
 user = input("Username: ");
@@ -128,14 +158,26 @@ disinfect();
 print("\n\n -- Commencing reverting procedure");
 bringBack(depth);
 
-if "_" in os.listdir():
-	linuxRem("_");
-if "\xa0" in os.listdir():
-	linuxRem("\xa0");
+for doc in os.listdir():
+	if "_" in doc:
+		linuxRem(doc);
+	if "\xa0" in doc:
+		linuxRem(doc);
 
 disinfect();
+if "\xa0.exe" in os.listdir():
+	linuxRem("\xa0.exe");
 
 print("\n\n -- Finished reverting...\nContents:");
 print(os.listdir());
+
+print("Updating virus list....\nContents:");
+print(db_new);
+
+os.chdir(exec_root);
+db_file = open("list.txt","a");
+for line in db_new:
+	db_file.write(line+"\n");
+db_file.close();
 
 print("\n\n -- DONE --");

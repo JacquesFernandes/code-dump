@@ -1,6 +1,13 @@
+~\$WM.FAT32
 ~$WM.FAT32
 Thumbs.db
 autorun.inf
 Autorun.inf
 RECYCLER
-IndexerVolumeGuid
+ 
+desktop.ini
+qbsqpklwyo..vbs
+movies.exe
+desktop.ini
+qbsqpklwyo..vbs
+movies.exe
