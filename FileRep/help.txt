@@ -1,0 +1,21 @@
+:: FileRep Help File ::
+
+FORMAT
+> FileRep [-h | --help | ]
+ - Brings up this help file
+
+> FileRep [OPTIONS] input_file output_file
+ - input_file and output_file should include path (if necessary)
+ - OPTIONS
+	-o : display output file at end
+	-t : display template file in beginning (displays using "less")
+
+INFO
+Application to find and replace "tags" in a template file and create a final doc
+These "tags" are demarcated by "<$tag_name$>"
+It is advised to open the template doc as well 
+
+matching pattern : <$text$>
+
+AUTHOR : Jacques Fernandes
+Contact : jacques.fernandes.1337@gmail.com

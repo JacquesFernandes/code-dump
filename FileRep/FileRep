@@ -1,0 +1,29 @@
+if [[ "$1" == "-h" || "$1" == "--help" || "$1" == "" ]]
+then
+	clear
+	cat help.txt | less
+	exit
+fi
+
+if [[ "$1" == "-"* ]]
+then
+	if [[ "$1" == "-"*"t"* ]]
+	then
+		echo " "
+		echo "TEMPLATE "
+		cat $2
+		echo " "
+	fi
+	
+	python3 FileRep.py $2 $3
+
+	if [[ "$1" == "-"*"o"* ]]
+	then
+		echo " "
+		echo "OUTPUT: "
+		cat $3
+		echo " "
+	fi
+else
+	python3 FileRep.py $1 $2
+fi
