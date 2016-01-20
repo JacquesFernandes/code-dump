@@ -1,0 +1,7 @@
+:: DocMaker ::
+
+Utility to create Documentation for all the functions
+for certain languages (See readme.txt) in your code!
+Creates a nice "man page" type view :D
+
+well, here we go!
